@@ -113,7 +113,7 @@ export const uiData = [
       inputs: 1,
       type: "basic",
       typeNum: 100,
-      isFavorite: false,
+      isFavorite: true,
       order: 112,
    },
    {
@@ -295,16 +295,6 @@ export const uiData = [
       typeNum: 200,
       isFavorite: false,
       order: 208,
-   },
-   {
-      name: "arrayPrototypeFilter",
-      desc:
-         "Press run to filter out the even numbers. The default array is [23, 44, 5, 16, 24, 37, 39, 22] if no input is used.",
-      inputs: 1,
-      type: "functional",
-      typeNum: 300,
-      isFavorite: false,
-      order: 300,
    },
    {
       name: "sliceArray",
@@ -497,7 +487,7 @@ export const uiData = [
       inputs: 2,
       type: "algorithm",
       typeNum: 400,
-      isFavorite: false,
+      isFavorite: true,
       order: 407,
    },
    {

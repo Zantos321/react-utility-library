@@ -2,6 +2,7 @@ import React from "react";
 import "./style/master.scss"; // applies global scss styles
 import { uiData } from "./data/ui";
 import FunctionUI from "./components/FunctionUI";
+import orderBy from "lodash/orderBy";
 
 export default class App extends React.Component {
    constructor() {
@@ -9,25 +10,47 @@ export default class App extends React.Component {
       console.log(uiData);
       this.state = {
          isFavoritesChecked: false,
-         allFuncs: uiData,
-         displayedFuncs: uiData,
+         allFuncs: orderBy(uiData, "order", "desc"),
+         displayedFuncs: orderBy(uiData, "order", "desc"),
+         orderBy: '["order", "desc"]',
       };
    }
 
-   toggleFavorites(e) {
-      this.setState({ isFavoritesChecked: !this.state.isFavoritesChecked });
-      const userInput = e.target.id;
-      console.log(userInput);
+   filterFuncs(e) {
+      const isFavoritesChecked = document.getElementById("viewMode-favorites")
+         .checked;
+      console.log(isFavoritesChecked);
+      const searchInput = document
+         .getElementById("search-input")
+         .value.toLowerCase();
       const allFuncs = [...this.state.allFuncs];
-      if (userInput === "viewMode-favorites") {
-         const filteredFuncs = allFuncs.filter((func) => {
+      if (isFavoritesChecked) {
+         this.setState({ isFavoritesChecked: true });
+         const favoriteFuncs = allFuncs.filter((func) => {
             return func.isFavorite;
          });
-         console.log(filteredFuncs);
-         this.setState({ displayedFuncs: filteredFuncs });
+         console.log(favoriteFuncs);
+         const filteredFuncs = favoriteFuncs.filter((func) => {
+            return func.name.toLowerCase().indexOf(searchInput) >= 0;
+         });
+         const orderArr = JSON.parse(this.state.orderBy);
+         const orderedFuncs = orderBy(filteredFuncs, ...orderArr);
+         this.setState({ displayedFuncs: orderedFuncs });
       } else {
-         this.setState({ displayedFuncs: allFuncs });
+         this.setState({ isFavoritesChecked: false });
+         const filteredFuncs = allFuncs.filter((func) => {
+            return func.name.toLowerCase().indexOf(searchInput) >= 0;
+         });
+         const orderArr = JSON.parse(this.state.orderBy);
+         const orderedFuncs = orderBy(filteredFuncs, ...orderArr);
+         this.setState({ displayedFuncs: orderedFuncs });
       }
+   }
+
+   changeOrder(e) {
+      this.setState({ orderBy: e.target.value }, () => {
+         this.filterFuncs();
+      });
    }
 
    render() {
@@ -52,7 +75,7 @@ export default class App extends React.Component {
                         className="custom-control-input"
                         checked={!this.state.isFavoritesChecked}
                         onChange={(e) => {
-                           this.toggleFavorites(e);
+                           this.filterFuncs(e);
                         }}
                      />
                      <label
@@ -70,7 +93,7 @@ export default class App extends React.Component {
                         className="custom-control-input"
                         checked={this.state.isFavoritesChecked}
                         onChange={(e) => {
-                           this.toggleFavorites(e);
+                           this.filterFuncs(e);
                         }}
                      />
 
@@ -91,15 +114,24 @@ export default class App extends React.Component {
                            aria-label="Search all functions"
                            aria-describedby="button-addon2"
                            id="search-input"
+                           onChange={(e) => {
+                              this.filterFuncs(e);
+                           }}
                         />
                      </div>
 
                      <div className="col-6">
-                        <select className="form-control">
-                           <option>Most recent</option>
-                           <option>Oldest</option>
-                           <option>A - Z</option>
-                           <option>Z - A</option>
+                        <select
+                           value={this.state.orderBy}
+                           className="form-control"
+                           onChange={(e) => this.changeOrder(e)}
+                        >
+                           <option value='["order", "desc"]'>
+                              Most recent
+                           </option>
+                           <option value='["order", "asc"]'>Oldest</option>
+                           <option value='["name", "asc"]'>A - Z</option>
+                           <option value='["name", "desc"]'>Z - A</option>
                         </select>
                      </div>
                   </div>
