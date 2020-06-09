@@ -208,11 +208,11 @@ export default class utils {
       // A1: an input
       // A2: an input
       // R: and array with the last array removed and the first array inserted into it
-      var array = [
+      const array = [
          ["Beer", 5],
          ["Ice Cream", 7],
       ];
-      var removedArray = array.pop();
+      const removedArray = array.pop();
       array.unshift([input1, input2]);
       return (
          array[0][0] +
@@ -236,9 +236,9 @@ export default class utils {
    // Stand in line
 
    static standInLine(input) {
-      var arr = [1, 2, 3, 4, 5, 6];
+      const arr = [1, 2, 3, 4, 5, 6];
       // R: removes and states the first number and adds the inputed number to the end
-      var removedNumber = 0;
+      const removedNumber = 0;
       arr.push(input);
       removedNumber = arr.shift();
       return (
@@ -252,7 +252,7 @@ export default class utils {
    // COUNTING CARDS
 
    static countingCards(card1, card2, card3, card4, card5) {
-      var count = 0;
+      const count = 0;
       switch (card1) {
          case 2:
          case 3:
@@ -354,7 +354,7 @@ export default class utils {
    // RECORD COLLECTION
 
    static recordCollection(id, prop, value) {
-      var collection = {
+      const collection = {
          1000: {
             album: "Pretty Hate Machine",
             artist: "Nine Inch Nails",
@@ -389,8 +389,8 @@ export default class utils {
    // ITERATE ODD NUMBERS WITH A FOR LOOP
 
    static forOddNumbers(input) {
-      var oddArray = [];
-      for (var count = 1; count <= input; count += 2) {
+      const oddArray = [];
+      for (let count = 1; count <= input; count += 2) {
          oddArray.push(count);
       }
       return oddArray;
@@ -399,7 +399,7 @@ export default class utils {
    // PROFILE LOOKUP
 
    static profileLookup(name, prop) {
-      var contacts = [
+      const contacts = [
          {
             firstName: "Akira",
             lastName: "Laine",
@@ -425,7 +425,7 @@ export default class utils {
             likes: ["JavaScript", "Gaming", "Foxes"],
          },
       ];
-      for (var count = 0; count < contacts.length; count++) {
+      for (let count = 0; count < contacts.length; count++) {
          if (contacts[count].firstName === name) {
             if (contacts[count].hasOwnProperty(prop)) {
                return contacts[count][prop];
@@ -479,18 +479,18 @@ export default class utils {
    // RETURN PART OF AN ARRAY USING SLICE METHOD
 
    static sliceArray(beginSlice, endSlice) {
-      var numArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-      var newArray = numArray.slice(beginSlice, endSlice);
+      const numArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+      const newArray = numArray.slice(beginSlice, endSlice);
       return newArray;
    }
 
    // REMOVE ELEMENTS WITH SLICE INSTEAD OF SPLICE
 
    static spliceBad(begin, end) {
-      var spliceArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-      var sliceArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-      var newSpliceArray = spliceArray.splice(begin, end);
-      var newSliceArray = sliceArray.slice(begin, end);
+      const spliceArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+      const sliceArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+      const newSpliceArray = spliceArray.splice(begin, end);
+      const newSliceArray = sliceArray.slice(begin, end);
       return (
          "The Array splice pulled from after splice: " +
          spliceArray +
@@ -515,10 +515,10 @@ export default class utils {
    // ADD ELEMENTS TO THE END OF AN ARRAY USING CONAT INSTEAD OF PUSH
 
    static pushVSconcat(userArr) {
-      let pushArray = [1, 2, 3, 4, 5];
-      let concatArray = [1, 2, 3, 4, 5];
+      const pushArray = [1, 2, 3, 4, 5];
+      const concatArray = [1, 2, 3, 4, 5];
       pushArray.push(userArr);
-      let newConcatArray = concatArray.concat(userArr);
+      const newConcatArray = concatArray.concat(userArr);
       return (
          "Push changed it's original array to :" +
          pushArray +
@@ -534,7 +534,7 @@ export default class utils {
    // USE THE REDUCE METHOD TO ANALYZE DATA
 
    static reduceArray(startArray) {
-      let addArray = startArray
+      const addArray = startArray
          // filters out negative numbers
          .filter((num) => num > 0)
          // adds the numbers together to produce a sum
@@ -545,7 +545,7 @@ export default class utils {
    // USE HIGHER-ORDER FUNCTIONS MAP, FILTER, OR REDUCE TO SOLVE AN COMPLEX PROBLEM
 
    static complexProblem(userArray, userPow) {
-      let powArray = userArray
+      const powArray = userArray
          // filters out the negative numbers, decimals, and odd numbers.
          .filter(
             (num) => num > 0 && num % parseFloat(num) === 0 && num % 2 === 0
@@ -558,7 +558,7 @@ export default class utils {
    // SORT AN ARRAY ALPHABETICALLY USING THE SORT METHOD\
 
    static sortArray() {
-      let userArray = ["l", "g", "a", "c", "d", "b", "f", "z", "h", "l", "a"];
+      const userArray = ["l", "g", "a", "c", "d", "b", "f", "z", "h", "l", "a"];
       return userArray.sort(function (a, b) {
          // compares the values with conditional ? if the same it doesnt move it if it is less than then it gets moved forward
          return a === b ? 0 : a < b ? -1 : 1;
@@ -568,7 +568,7 @@ export default class utils {
    // SPLIT A STRING INTO AN ARRAY USING THE SLIP METHOD
 
    static splitArray(userString) {
-      var stringArray = userString.split(/\W/);
+      const stringArray = userString.split(/\W/);
       return stringArray;
    }
 
@@ -576,7 +576,7 @@ export default class utils {
 
    static joinArray(userString) {
       // Takes the string and turns it into an array then turns it back into a string.
-      let newArray = userString.split(/\W/).join(" ");
+      const newArray = userString.split(/\W/).join(" ");
       return newArray;
    }
 
@@ -624,11 +624,12 @@ export default class utils {
 
    static factoralize(userNum) {
       // need the given number and a starting point for the factoral
-      for (var product = 1; userNum > 0; userNum--) {
+      let userProduct = 0;
+      for (userProduct = 1; userNum > 0; userNum--) {
          // declared the product and set the for loop to run while the userNum is greater than zero
-         product *= userNum; // takes the value of the product and multiplies it by the userNum each time until the userNum is at 1
+         userProduct *= userNum; // takes the value of the product and multiplies it by the userNum each time until the userNum is at 1
       }
-      return product;
+      return userProduct;
    }
 
    // FIND THE LONGEST WORD IN A STRING
@@ -645,7 +646,7 @@ export default class utils {
    // RETURN THE LARGEST NUMBER IN THE ARRAYS
 
    static largestNumberArrays(userArray1, userArray2) {
-      var numberLargestArray = [userArray1]; // put first array as a sub array of the new array
+      const numberLargestArray = [userArray1]; // put first array as a sub array of the new array
       numberLargestArray.push(userArray2); // added the second array as a second sub array in the new array
       return numberLargestArray.map(function (largeGroup) {
          // start of the map with the function for the large group of numbers
@@ -672,7 +673,7 @@ export default class utils {
    // REPEAT A STRING REPEAT A STRING
    static stringRepeat(userString, userRepeatNumber) {
       let repeatString = ""; // base empty string
-      for (var count = 0; count < userRepeatNumber; count++) {
+      for (let count = 0; count < userRepeatNumber; count++) {
          // runs the loop until count gets to the number the user specified
          repeatString += userString; // for loop to add the userString to the repeatString
       }
